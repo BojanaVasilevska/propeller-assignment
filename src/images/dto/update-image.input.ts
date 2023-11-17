@@ -1,11 +1,10 @@
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { InputType, Field } from '@nestjs/graphql';
 
+@InputType()
 export class UpdateImageInput {
-  @IsOptional()
-  @IsString()
+  @Field({ nullable: true })
   url?: string;
 
-  @IsOptional()
-  @IsNumber()
+  @Field({ nullable: true })
   priority?: number;
 }
