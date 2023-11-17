@@ -1,11 +1,11 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { InputType, Field } from '@nestjs/graphql';
 
+@InputType()
 export class CreateImageInput {
-  @IsNotEmpty()
-  @IsString()
+  @Field()
   url: string;
 
-  @IsNotEmpty()
-  @IsNumber()
+  @Field({ defaultValue: 1000 })
   priority: number;
+
 }
