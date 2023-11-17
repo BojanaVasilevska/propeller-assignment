@@ -24,8 +24,8 @@ export class ImagesController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() updateImageDto: UpdateImageInput) {
-    return this.imagesService.update(+id, updateImageDto);
+  async update(@Param('id') id: string, @Body() UpdateImageInput: UpdateImageInput) {
+    return this.imagesService.update(+id, UpdateImageInput);
   }
 
   @Delete(':id')
