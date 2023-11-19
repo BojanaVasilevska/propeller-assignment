@@ -3,6 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ProductsModule } from './products/products.module';
 import { ImagesModule } from './images/images.module';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -16,15 +18,10 @@ import { ImagesModule } from './images/images.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    GraphQLModule.forRoot({
-      autoSchemaFile: 'schema.gql',
-      buildSchemaOptions: {
-        orphanedTypes: [],
-      },
-      driver: {
-        provide: 'APOLLO_DRIVER',
-        useClass: require('apollo-server-express').ApolloServerBase,
-      },
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    
     }),
     ProductsModule,
     ImagesModule,
